@@ -1,0 +1,20 @@
+{
+  "name": "knights-travels",
+  "version": "1.0.0",
+  "description": "F function knightMoves that shows the shortest possible way to get from one square to another by outputting all squares the knight will stop on along the way.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Essoh21/knights-travels.git"
+  },
+  "type": "module",
+  "author": "Essohanam",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Essoh21/knights-travels/issues"
+  },
+  "homepage": "https://github.com/Essoh21/knights-travels#readme"
+}
