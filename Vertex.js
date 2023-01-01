@@ -1,7 +1,6 @@
 class Vertex {
-    constructor(position, moves) {
-        this.position = position;
-        this.parent = null;
+    constructor(knightPosition) {
+        this.position = knightPosition;
         this.one = null;
         this.two = null;
         this.three = null
