@@ -1,4 +1,4 @@
-import Vertex from "./Vertex.js";
+import Knight from "./Knight.js";
 
 class Board {
     constructor(boardxMax, boardyMax) {
@@ -9,11 +9,12 @@ class Board {
 
     buildGraphFrom(position, destination) {
         let currentVertex = new Vertex(position);
+        let outputGraph = currentVertex;
         if (
             currentVertex.position[0] == destination[0]
             && currentVertex.position[1] == destination[1]
         ) {
-            return currentVertex;
+            return outputGraph;
         }
 
 
@@ -37,12 +38,17 @@ class Board {
             , currentVertex.seven
             , currentVertex.eight
         ] = vertexChildren;
+
         for (let i = 0; i < vertexChildren.length; i += 1) {
             if (vertexChildren[i] === null) continue;
-            // console.log(vertexChildren[i].position)
-            //this.buildGraphFrom(vertexChildren[i].position, destination);
-        }
+            if ((vertexChildren[i][0] === destination[0])
+                && (vertexChildren[i][1] === destination[1])) {
+                outputGraph = vertexChildren[i];
+                break;
+            }
 
+        }
+        return outputGraph;
     }
 
     knightMoves(start, end) {
