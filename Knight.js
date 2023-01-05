@@ -22,9 +22,9 @@ class Knight {
             , [x - 1, y - 2], [x + 1, y - 2]
         ];
         return allMovesFromPosition.filter(function (move) {
-            if ((move[0] > 0)
+            if ((move[0] >= 0)
                 && (move[0] < 8)
-                && (move[1] > 0)
+                && (move[1] >= 0)
                 && (move[1] < 8)) return true;
             return false;
         });

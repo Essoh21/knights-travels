@@ -2,8 +2,11 @@ import Knight from "./Knight.js";
 
 const knightMoves = (start, destination) => {
     const knight = new Knight(start);
-    const knightAtDestination = new Knight(destination);
     const q = [knight];
+    const knightPathToDestination = [destination];
+    if ((start[0] === destination[0]) && (start[1] === destination[1])) {
+        return knightPathToDestination;
+    }
 
     while (!(queueContainsKnightAtPosition(q, destination))) {
         const currentKnightMove = q.shift();
@@ -14,18 +17,21 @@ const knightMoves = (start, destination) => {
         }
 
         q.push(...nextMovesFromCurrent);
-        console.log(q);
+
     }
 
-    const knightPathToDestinationQueue = [knightAtDestination];
-    const knightPathToDestination = [];
-    while (!(queueContainsKnightAtPosition(knightPathToDestinationQueue, start))) {
-        // console.log(knightPathToDestinationQueue) //---------------
-        const currentKnightPosition = knightPathToDestinationQueue[0]
+    let index = getIndexOfDestinationKnightFromQ(q, destination);
+    const knightPathToDestinationQueue = [q[index]];
+    while (!(queueContainsKnightAtPosition(
+        knightPathToDestinationQueue
+        , start
+    ))) {
+        const previousKnight = knightPathToDestinationQueue[0]
             .getPreviousPosition();
-        knightPathToDestinationQueue.unshift(currentKnightPosition);
-
+        knightPathToDestinationQueue.unshift(previousKnight);
+        knightPathToDestination.push(previousKnight.position);
     }
+    return knightPathToDestination.slice().reverse();
 }
 
 const turnPositionsToKnights = (positions) => {
@@ -47,5 +53,18 @@ const queueContainsKnightAtPosition = (q, positionCoordinates) => {
     })
     return result;
 }
-knightMoves([0, 0], [4, 4]);
-//console.log(new Knight([2, 1]));
+
+const getIndexOfDestinationKnightFromQ = (q, destinationCoordinates) => {
+    let destinationIndex;
+    q.forEach((knight, index) => {
+        if ((destinationCoordinates[0] == knight.position[0])
+            && (destinationCoordinates[1] == knight.position[1])) {
+            destinationIndex = index;
+        }
+
+    })
+    return destinationIndex;
+}
+
+
+console.log(knightMoves([3, 3], [0, 0]));
